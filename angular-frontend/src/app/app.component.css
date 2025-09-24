@@ -1,0 +1,6 @@
+/* Root component styles */
+app-root {
+  display: block;
+  min-height: 100vh;
+}
+

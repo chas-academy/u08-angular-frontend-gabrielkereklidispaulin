@@ -1,0 +1,57 @@
+<div class="character-detail-container">
+  <div class="back-button-container">
+    <button (click)="goBack()" class="back-btn">
+      ← Back to Characters
+    </button>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">
+    Loading character...
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="!isLoading && character" class="character-detail-card">
+    <div class="character-header">
+      <h1 class="character-name">{{ character.name }}</h1>
+      <div class="character-badges">
+        <span class="tier-badge" [style.background-color]="getTierColor(character.tier_ranking)">
+          {{ character.tier_ranking }}
+        </span>
+        <span class="weight-badge" [style.background-color]="getWeightClassColor(character.weight_class)">
+          {{ character.weight_class }}
+        </span>
+      </div>
+    </div>
+
+    <div class="character-content">
+      <div class="character-info">
+        <div class="info-section">
+          <h3>Basic Information</h3>
+          <div class="info-grid">
+            <div class="info-item">
+              <label>Movement Speed:</label>
+              <span class="info-value">{{ character.movement_speed }}</span>
+            </div>
+            <div class="info-item">
+              <label>Game Series:</label>
+              <span class="info-value">{{ character.original_game_series }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="character.notable_players && character.notable_players.length > 0" class="info-section">
+          <h3>Notable Players</h3>
+          <div class="players-list">
+            <span *ngFor="let player of character.notable_players" class="player-tag">
+              {{ player }}
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

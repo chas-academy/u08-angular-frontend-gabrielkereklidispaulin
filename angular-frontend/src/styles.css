@@ -1,0 +1,53 @@
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #1c1c1c;
+  color: #ffffff;
+  line-height: 1.6;
+}
+
+html, body {
+  height: 100%;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2a2a2a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+/* Focus styles for accessibility */
+*:focus {
+  outline: 2px solid #ffcc00;
+  outline-offset: 2px;
+}
+
+/* Button focus styles */
+button:focus {
+  outline: 2px solid #ffcc00;
+  outline-offset: 2px;
+}
+
+/* Link focus styles */
+a:focus {
+  outline: 2px solid #ffcc00;
+  outline-offset: 2px;
+}

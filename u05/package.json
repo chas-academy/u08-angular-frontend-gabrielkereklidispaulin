@@ -1,0 +1,24 @@
+{
+  "name": "u05-restful-api",
+  "version": "1.0.0",
+  "description": "```json\r {\r   \"id\": 1,\r   \"name\": \"Fox\",\r   \"weight_class\": \"light\",\r   \"movement_speed\": 10,\r   \"original_game_series\": \"Star Fox\",\r   \"icon\": \"url-to-icon\",\r   \"image\": \"url-to-image\",\r   \"model\": \"url-to-3d-model\",\r   \"tier_ranking\": \"S\",\r   \"notable_players\": [\"Leffen\", \"Mango\"]\r }",
+  "main": "/src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongodb": "^6.15.0",
+    "mongoose": "^8.13.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}

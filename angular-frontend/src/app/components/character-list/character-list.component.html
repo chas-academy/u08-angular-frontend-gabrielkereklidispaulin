@@ -1,0 +1,211 @@
+<div class="character-app">
+  <h1>Melee Character Manager</h1>
+  
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Create Character Form -->
+  <div class="form-section">
+    <h2>Add New Character</h2>
+    <form [formGroup]="characterForm" (ngSubmit)="onSubmit()" class="character-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" formControlName="name" required>
+          <div *ngIf="characterForm.get('name')?.invalid && characterForm.get('name')?.touched" class="error">
+            Name is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="tier_ranking">Tier Ranking:</label>
+          <select id="tier_ranking" formControlName="tier_ranking" required>
+            <option value="">Select tier</option>
+            <option value="S">S</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+          </select>
+          <div *ngIf="characterForm.get('tier_ranking')?.invalid && characterForm.get('tier_ranking')?.touched" class="error">
+            Tier ranking is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="weight_class">Weight Class:</label>
+          <select id="weight_class" formControlName="weight_class" required>
+            <option value="">Select weight class</option>
+            <option value="light">Light</option>
+            <option value="medium">Medium</option>
+            <option value="heavy">Heavy</option>
+          </select>
+          <div *ngIf="characterForm.get('weight_class')?.invalid && characterForm.get('weight_class')?.touched" class="error">
+            Weight class is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="movement_speed">Movement Speed:</label>
+          <select id="movement_speed" formControlName="movement_speed" required>
+            <option value="">Select speed</option>
+            <option value="70">70</option>
+            <option value="60">60</option>
+            <option value="55">55</option>
+            <option value="54">54</option>
+            <option value="50">50</option>
+            <option value="48">48</option>
+            <option value="44">44</option>
+            <option value="42">42</option>
+            <option value="40">40</option>
+          </select>
+          <div *ngIf="characterForm.get('movement_speed')?.invalid && characterForm.get('movement_speed')?.touched" class="error">
+            Movement speed is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="original_game_series">Original Game Series:</label>
+        <input type="text" id="original_game_series" formControlName="original_game_series" required>
+        <div *ngIf="characterForm.get('original_game_series')?.invalid && characterForm.get('original_game_series')?.touched" class="error">
+          Original game series is required
+        </div>
+      </div>
+
+
+      <button type="submit" [disabled]="characterForm.invalid || isLoading" class="submit-btn">
+        {{ isLoading ? 'Adding...' : 'Add Character' }}
+      </button>
+    </form>
+  </div>
+
+  <!-- Edit Character Form -->
+  <div *ngIf="isEditing" class="form-section edit-section">
+    <h2>Edit Character</h2>
+    <form [formGroup]="editForm" (ngSubmit)="onEditSubmit()" class="character-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="edit-name">Name:</label>
+          <input type="text" id="edit-name" formControlName="name" required>
+          <div *ngIf="editForm.get('name')?.invalid && editForm.get('name')?.touched" class="error">
+            Name is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="edit-tier_ranking">Tier Ranking:</label>
+          <select id="edit-tier_ranking" formControlName="tier_ranking" required>
+            <option value="S">S</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+          </select>
+          <div *ngIf="editForm.get('tier_ranking')?.invalid && editForm.get('tier_ranking')?.touched" class="error">
+            Tier ranking is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="edit-weight_class">Weight Class:</label>
+          <select id="edit-weight_class" formControlName="weight_class" required>
+            <option value="light">Light</option>
+            <option value="medium">Medium</option>
+            <option value="heavy">Heavy</option>
+          </select>
+          <div *ngIf="editForm.get('weight_class')?.invalid && editForm.get('weight_class')?.touched" class="error">
+            Weight class is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="edit-movement_speed">Movement Speed:</label>
+          <select id="edit-movement_speed" formControlName="movement_speed" required>
+            <option value="70">70</option>
+            <option value="60">60</option>
+            <option value="55">55</option>
+            <option value="54">54</option>
+            <option value="50">50</option>
+            <option value="48">48</option>
+            <option value="44">44</option>
+            <option value="42">42</option>
+            <option value="40">40</option>
+          </select>
+          <div *ngIf="editForm.get('movement_speed')?.invalid && editForm.get('movement_speed')?.touched" class="error">
+            Movement speed is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="edit-original_game_series">Original Game Series:</label>
+        <input type="text" id="edit-original_game_series" formControlName="original_game_series" required>
+        <div *ngIf="editForm.get('original_game_series')?.invalid && editForm.get('original_game_series')?.touched" class="error">
+          Original game series is required
+        </div>
+      </div>
+
+
+      <div class="button-group">
+        <button type="submit" [disabled]="editForm.invalid || isLoading" class="submit-btn">
+          {{ isLoading ? 'Saving...' : 'Save Changes' }}
+        </button>
+        <button type="button" (click)="cancelEdit()" class="cancel-btn">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Character List -->
+  <div class="character-list-section">
+    <h2>Character List</h2>
+    
+    <div *ngIf="isLoading" class="loading">
+      Loading characters...
+    </div>
+
+    <div *ngIf="!isLoading && characters.length === 0" class="no-characters">
+      No characters found. Add your first character above!
+    </div>
+
+    <div *ngIf="!isLoading && characters.length > 0" class="character-grid">
+      <div *ngFor="let character of characters" class="character-card">
+        <div class="character-header">
+          <h3 class="character-name">{{ character.name }}</h3>
+          <div class="character-badges">
+            <span class="tier-badge" [style.background-color]="getTierColor(character.tier_ranking)">
+              {{ character.tier_ranking }}
+            </span>
+            <span class="weight-badge" [style.background-color]="getWeightClassColor(character.weight_class)">
+              {{ character.weight_class }}
+            </span>
+          </div>
+        </div>
+
+        <div class="character-details">
+          <p><strong>Movement Speed:</strong> {{ character.movement_speed }}</p>
+          <p><strong>Game Series:</strong> {{ character.original_game_series }}</p>
+          
+          <div *ngIf="character.notable_players && character.notable_players.length > 0" class="notable-players">
+            <strong>Notable Players:</strong>
+            <ul>
+              <li *ngFor="let player of character.notable_players">{{ player }}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="character-actions">
+          <button (click)="startEdit(character)" class="edit-btn">Edit</button>
+          <button (click)="deleteCharacter(character._id!)" class="delete-btn">Delete</button>
+          <button (click)="viewCharacter(character._id!)" class="view-btn">View</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

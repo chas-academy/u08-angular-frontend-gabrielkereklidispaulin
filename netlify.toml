@@ -1,0 +1,16 @@
+[build]
+  command = "cd angular-frontend && ng build"
+  publish = "angular-frontend/dist/melee-characters-app/browser"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[dev]
+  command = "cd angular-frontend && ng serve"
+  port = 4200
+  publish = "angular-frontend/dist/melee-characters-app/browser"
